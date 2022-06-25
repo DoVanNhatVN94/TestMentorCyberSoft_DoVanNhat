@@ -12,6 +12,7 @@ import {
 } from "@ant-design/icons";
 import { Link, NavLink } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { DangKyND } from "../../redux/Action/action";
 
 export const stypeIF = {
   color: "WHITE",
@@ -36,6 +37,21 @@ export const stypeIT = {
   alignItems: "center",
 };
 
+export const styleForm = {
+  padding:'1.5em',
+  background:'#547dde1f',
+  borderRadius:10
+}
+
+export const styleBtn = {
+  width: '100%',
+  height:30,
+  background:'#6576de',
+  color:'white',
+  border: 'none',
+  borderRadius: 5
+}
+
 function SignUp() {
   const dispatch = useDispatch();
 
@@ -45,7 +61,9 @@ function SignUp() {
     padding: "200px 0",
   };
 
-  const onFormLayoutChange = () => {};
+
+
+
 
   const formik = useFormik({
     initialValues: {
@@ -71,14 +89,16 @@ function SignUp() {
     }),
     onSubmit: (values) => {
       console.log(values);
-      // dispatch(RegisterAction(values));
+      dispatch(DangKyND(values))
     },
   });
 
   return (
     <div style={style}>
-      <h2 className="text-center sign_up py-2">Register CyberBugs</h2>
-      <Form  onSubmitCapture={formik.handleSubmit} layout="horizontal" onValuesChange={onFormLayoutChange}>
+     
+      
+      <Form style={styleForm}  onSubmitCapture={formik.handleSubmit} layout="horizontal">
+      <h3 className="text-center sign_up py-2">Register CyberBugs</h3>
         <Form.Item>
           <Input
             onChange={formik.handleChange}
@@ -86,7 +106,7 @@ function SignUp() {
             name="name"
             size="large"
             placeholder="name"
-            prefix={<UserOutlined />}
+            prefix={<MailOutlined />}
           />
           {formik.touched.name && formik.errors.name ? (
               <div className="alert alert-danger">{formik.errors.name}</div>
@@ -135,7 +155,7 @@ function SignUp() {
 
         <button
           type="submit"
-          className="btn btn-outline-primary"
+          style={styleBtn}
         >
           Button
         </button>

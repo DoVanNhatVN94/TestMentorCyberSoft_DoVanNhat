@@ -2,13 +2,20 @@ import { http } from "../util/settingAxios"
 
 class service {
 
-    signup=(user)=>{
+    signupSV=(user)=>{
         return http.post('/api/Users/signup',user)
     }
-    signin=(user)=>{
+    signinSV=(user)=>{
         return http.post('/api/Users/signin',user)
     }
-     signin2=(user)=>{
+    ProjectCategorySV=()=>{
+        return http.get('/api/ProjectCategory')
+    }
+    createProjectSV=(body)=>{
+        return http.post('/api/Project/createProject',body)
+    }
+    getAllProjectSV=(user)=>{
         return http.post('/api/Project/getAllProject',user)
     }
 } 
+export const Manage = new service()
