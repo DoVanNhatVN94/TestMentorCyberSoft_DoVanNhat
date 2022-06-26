@@ -27,7 +27,6 @@ export default function SignIn() {
       // .notOneOf(taoDSNDEmail, "Email đã được sử dụng")
     }),
     onSubmit: (values) => {
-      console.log(values);
       dispatch(DangNhap(values));
     },
   });
