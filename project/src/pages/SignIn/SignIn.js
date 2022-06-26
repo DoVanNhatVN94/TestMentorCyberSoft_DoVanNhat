@@ -12,9 +12,8 @@ import { styleBtn } from "../SignUp/SignUp";
 import { useDispatch } from "react-redux";
 import { DangNhap } from "../../redux/Action/action";
 
-
 export default function SignIn() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -29,7 +28,7 @@ export default function SignIn() {
     }),
     onSubmit: (values) => {
       console.log(values);
-      dispatch(DangNhap(values))
+      dispatch(DangNhap(values));
     },
   });
   return (
@@ -81,9 +80,11 @@ export default function SignIn() {
               Button
             </button>
             <div className="text-center py-2">
-              <span>Already have an account?</span>
-              <Link to="/signup" className=" text-decoration-none">
-                Login now
+              <span>
+              Don't have an account yet? 
+              </span>
+              <Link to="/signup" className=" text-decoration-none px-1">
+                Register now
               </Link>
             </div>
             <div className=" d-flex justify-content-center py-2">

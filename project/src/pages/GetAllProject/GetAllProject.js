@@ -1,10 +1,21 @@
 /** @format */
 
-import React from "react";
-import { Space, Table, Tag } from "antd";
+import React, { useEffect } from "react";
+import { Avatar, Input, Space, Table, Tag } from "antd";
+import { EllipsisOutlined } from "@ant-design/icons";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  GetAllProjectAction,
+  SearchGetAllProjectAction,
+} from "../../redux/Action/action";
+const { Search } = Input;
 
 export default function GetAllProject() {
-  const color = [
+  const dispatch = useDispatch();
+
+  const { data } = useSelector((state) => state.MainReducer);
+  console.log(data);
+  const colorAR = [
     "magenta",
     "red",
     "volcano",
@@ -17,152 +28,84 @@ export default function GetAllProject() {
     "geekblue",
     "purple",
   ];
-  // var randcl = color[Math.floor(Math.random() * color.length)];
-  const columns = [
-    {
-      title: "Name",
-      dataIndex: "name",
-      key: "name",
-      render: (text) => <a>{text}</a>,
-    },
-    {
-      title: "Age",
-      dataIndex: "age",
-      key: "age",
-    },
-    {
-      title: "Address",
-      dataIndex: "address",
-      key: "address",
-    },
-    {
-      title: "Tags",
-      key: "tags",
-      dataIndex: "tags",
-      render: (_, { tags }) => (
-        <>
-          {tags.map((tag) => {
-            let color = tag.length > 5 ? "geekblue" : "green";
 
-            if (tag === "loser") {
-              color = "volcano";
-            }
-
-            return (
-              <Tag color={color} key={tag}>
-                {tag.toUpperCase()}
-              </Tag>
-            );
+  const columns2 = [
+    {
+      title: "ID",
+      dataIndex: "id",
+      key: "projectId",
+    },
+    {
+      title: "Project Name",
+      dataIndex: "projectName",
+      key: "projectName",
+      render: (text) => <a href="#">{text}</a>,
+    },
+    {
+      title: "Category Name",
+      dataIndex: "categoryName",
+      key: "categoryName",
+    },
+    {
+      title: "Creator",
+      key: "creator",
+      dataIndex: "creator",
+      render: (creator) => <span>{creator.name}</span>,
+    },
+    {
+      title: "Members",
+      key: "members",
+      dataIndex: "members",
+      render: (_, { members }) => (
+        <Avatar.Group
+          maxCount={2}
+          maxStyle={{ color: "#f56a00", backgroundColor: "#fde3cf" }}
+        >
+          {members.map((user) => {
+            return <Avatar key={`Avatar ${user}`} src={user?.avatar} />;
           })}
-        </>
+        </Avatar.Group>
       ),
     },
     {
       title: "Action",
       key: "action",
-      render: (_, record) => (
-        <Space size="middle">
-          <a>Invite {record.name}</a>
-          <a>Delete</a>
-        </Space>
+      render: (x) => (
+        <a>
+          <EllipsisOutlined />
+        </a>
       ),
     },
   ];
 
-  const columns2=[
-    {
-      title:"id",
-      dataIndex:"id",
-      key:"id",
-      render:(text)=> <a>{text}</a>
-    },
-  ]
+  useEffect(() => {
+    dispatch(GetAllProjectAction());
+  }, []);
 
-  const data = [
-    {
-      key: "1",
-      name: "John Brown",
-      age: 32,
-      address: "New York No. 1 Lake Park",
-      tags: ["nice", "developer"],
-    },
-    {
-      key: "2",
-      name: "Jim Green",
-      age: 42,
-      address: "London No. 1 Lake Park",
-      tags: ["loser"],
-    },
-    {
-      key: "3",
-      name: "Joe Black",
-      age: 32,
-      address: "Sidney No. 1 Lake Park",
-      tags: ["cool", "teacher"],
-    },
-    ,
-    {
-      key: "3",
-      name: "Joe Black",
-      age: 32,
-      address: "Sidney No. 1 Lake Park",
-      tags: ["cool", "teacher"],
-    },
-    {
-      key: "3",
-      name: "Joe Black",
-      age: 32,
-      address: "Sidney No. 1 Lake Park",
-      tags: ["cool", "teacher"],
-    },
-    {
-      key: "3",
-      name: "Joe Black",
-      age: 32,
-      address: "Sidney No. 1 Lake Park",
-      tags: ["cool", "teacher"],
-    },
-    {
-      key: "3",
-      name: "Joe Black",
-      age: 32,
-      address: "Sidney No. 1 Lake Park",
-      tags: ["cool", "teacher"],
-    },
-    {
-      key: "3",
-      name: "Joe Black",
-      age: 32,
-      address: "Sidney No. 1 Lake Park",
-      tags: ["cool", "teacher"],
-    },
-    {
-      key: "3",
-      name: "Joe Black",
-      age: 32,
-      address: "Sidney No. 1 Lake Park",
-      tags: ["cool", "teacher"],
-    },
-    {
-      key: "3",
-      name: "Joe Black",
-      age: 32,
-      address: "Sidney No. 1 Lake Park",
-      tags: ["cool", "teacher"],
-    },
-    {
-      key: "3",
-      name: "Joe Black",
-      age: 32,
-      address: "Sidney No. 1 Lake Park",
-      tags: ["cool", "teacher"],
-    },
-  ];
+  const onSearch = (value) => {
+    if (value) dispatch(SearchGetAllProjectAction(value));
+    else  dispatch(GetAllProjectAction());
+  };
 
   return (
     <div className="container">
       <h2>PROJECT</h2>
-      <Table columns={columns} dataSource={data} />;
+      <Search
+        placeholder="input search text"
+        allowClear
+        onSearch={onSearch}
+        style={{
+          width: 200,
+        }}
+      />
+      <Table
+        columns={columns2}
+        dataSource={data}
+        rowKey={(row) => {
+          return row.id;
+        }}
+      />
+      ;
     </div>
   );
 }

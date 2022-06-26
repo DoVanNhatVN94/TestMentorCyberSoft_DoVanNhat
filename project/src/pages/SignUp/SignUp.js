@@ -3,14 +3,13 @@
 import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { Button, Form, Input } from "antd";
+import { Form, Input } from "antd";
 import {
-  UserOutlined,
   MailOutlined,
   PhoneOutlined,
   LockOutlined,
 } from "@ant-design/icons";
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { DangKyND } from "../../redux/Action/action";
 
@@ -58,7 +57,7 @@ function SignUp() {
   const style = {
     width: 300,
     margin: "auto",
-    padding: "200px 0",
+    padding: "50px 0",
   };
 
 
@@ -161,8 +160,8 @@ function SignUp() {
         </button>
         <div className="text-center py-2">
           <span>
-            Already have an account?{" "}
-            <Link to="/signin" className=" text-decoration-none">
+          Already have an account?
+            <Link to="/signin" className=" text-decoration-none px-1">
               Login now
             </Link>
           </span>

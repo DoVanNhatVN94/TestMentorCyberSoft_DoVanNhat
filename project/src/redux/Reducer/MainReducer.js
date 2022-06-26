@@ -1,10 +1,15 @@
 /** @format */
 
-import { DangNhapNDType, ProjectCategoryType } from "../Type/type";
+import {
+  DangNhapNDType,
+  GetAllProjectType,
+  ProjectCategoryType,
+} from "../Type/type";
 
 const initialValues = {
   user: {},
   pc: [],
+  data: [],
 };
 
 export const MainReducer = (state = initialValues, action) => {
@@ -15,6 +20,10 @@ export const MainReducer = (state = initialValues, action) => {
 
     case ProjectCategoryType:
       state.pc = [...action.pc];
+      return { ...state };
+
+    case GetAllProjectType:
+      state.data = [...action.data];
       return { ...state };
     default:
       return { ...state };

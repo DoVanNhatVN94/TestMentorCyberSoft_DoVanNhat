@@ -2,7 +2,7 @@
 
 import { message } from "antd";
 import { Manage } from "../../services/service";
-import { DangNhapNDType, ProjectCategoryType } from "../Type/type";
+import { DangNhapNDType, GetAllProjectType, ProjectCategoryType } from "../Type/type";
 
 export const DangKyND = (user) => {
   return async (dispatch) => {
@@ -69,3 +69,41 @@ export const ProjectCategoryAction = () => {
     }
   };
 };
+
+
+export const GetAllProjectAction = () => {
+  return async (dispatch) => {
+    try {
+      const result = await Manage.getAllProjectSV();
+      if (result.status === 200) {
+        console.log(result.data.message);
+        dispatch({
+          type: GetAllProjectType,
+          data: result.data.content,
+        });
+      }
+    } catch (error) {
+      console.log("error", error);
+      console.log("error", error.response?.data);
+    }
+  };
+};
+export const  SearchGetAllProjectAction = (keyWord) => {
+  return async (dispatch) => {
+    try {
+      const result = await Manage.searchGetAllProjectSV(keyWord);
+      if (result.status === 200) {
+        console.log(result.data.message);
+        dispatch({
+          type: GetAllProjectType,
+          data: result.data.content,
+        });
+      }
+    } catch (error) {
+      console.log("error", error);
+      console.log("error", error.response?.data);
+    }
+  };
+};
+
+

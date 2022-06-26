@@ -11,6 +11,7 @@ import "./App.css";
 import SignIn from "./pages/SignIn/SignIn";
 import CreateProject from "./pages/CreateProject/CreateProject";
 import GetAllProject from "./pages/GetAllProject/GetAllProject";
+import MainTemplate from './Templates/MainTemplate';
 
 export const history = createBrowserHistory();
 
@@ -21,10 +22,10 @@ function App() {
     <Router history={history}>
       <Switch>
         
-        <Route  path="/signup" component={SignUp} />
-        <Route  path="/signin" component={SignIn} />
-        <Route  path="/createProject" component={CreateProject} />
-        <Route  path="/getAllProject" component={GetAllProject} />
+        <MainTemplate  path="/signup" component={SignUp} />
+        <MainTemplate  path="/signin" component={SignIn} />
+        <MainTemplate  path="/createProject" component={CreateProject} />
+        <MainTemplate  path="/getAllProject" component={GetAllProject} />
       </Switch>
     </Router>
   );
