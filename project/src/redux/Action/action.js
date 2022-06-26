@@ -45,14 +45,14 @@ export const DangNhap = (user) => {
       const result = await Manage.signinSV(user);
       if (result.status === 200) {
         console.log(result.data.content);
-        await localStorage.setItem("user", JSON.stringify(result.data.content));
-        await dispatch({
+        localStorage.setItem("user", JSON.stringify(result.data.content));
+        dispatch({
           type: DangNhapNDType,
           content: result.data.content,
         });
-        await dispatch(GetAllProjectAction());
-        message.success("Dang Nhap thanh cong !", 3);
-        await history.push("/getallproject");
+        message.success("Dang Nhap thanh cong !", 3, () =>
+          window.location.reload()
+        );
       }
     } catch (error) {
       message.error(error.response?.data.message, 3);
@@ -90,7 +90,6 @@ export const GetAllProjectAction = () => {
         });
       }
     } catch (error) {
-      if (error.status === 401) console.log(error.data.message);
       console.log("error", error);
       console.log("error", error.response?.data);
     }
@@ -107,7 +106,6 @@ export const SearchGetAllProjectAction = (keyWord) => {
           data: result.data.content,
         });
       }
-      if (result.status === 401) console.log(result.data.message);
     } catch (error) {
       console.log("error", error);
       console.log("error", error.response?.data);

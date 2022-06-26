@@ -16,6 +16,7 @@ import GetAllProject from "./pages/GetAllProject/GetAllProject";
 export const history = createBrowserHistory();
 
 function App() {
+  
   return (
     <Router history={history}>
       <div>

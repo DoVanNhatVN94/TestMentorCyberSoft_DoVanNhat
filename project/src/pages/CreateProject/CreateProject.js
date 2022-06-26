@@ -4,20 +4,16 @@ import React, { useEffect, useRef, useState } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import { useDispatch, useSelector } from "react-redux";
 import { CreateProjectAction, ProjectCategoryAction } from "../../redux/Action/action";
-import Item from "antd/lib/list/Item";
+
 import { Button, Form, Input, Select } from "antd";
 
 const { Option } = Select;
 
 function CreateProject() {
   const dispatch = useDispatch();
-  const [form] = Form.useForm();
-
-  const [value3, setValue3] = useState("");
 
   const editorRef = useRef(null);
-  const { pc,user } = useSelector((state) => state.MainReducer);
-  console.log(user);
+  const { pc } = useSelector((state) => state.MainReducer);
 
   useEffect(() => {
     dispatch(ProjectCategoryAction());
@@ -32,13 +28,6 @@ function CreateProject() {
       );
     });
   };
-
-  // const txtEditor = () => {
-  //   if (editorRef.current) {
-  //     console.log(editorRef.current.getContent());
-  //     setValue3(editorRef.current.getContent());
-  //   }
-  // };
   const onFinish = (values) => {
     const description = editorRef.current.getContent();
 
