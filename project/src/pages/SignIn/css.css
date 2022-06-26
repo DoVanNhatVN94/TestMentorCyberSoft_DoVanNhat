@@ -1,0 +1,6 @@
+.bg{
+    background: url(../../assets/img/image.bmp);
+    height: 500px;
+    background-size: cover;
+    background-position: center;
+}

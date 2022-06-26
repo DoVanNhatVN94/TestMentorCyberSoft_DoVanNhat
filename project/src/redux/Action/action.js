@@ -1,8 +1,12 @@
 /** @format */
-
+import { history } from "../../App";
 import { message } from "antd";
 import { Manage } from "../../services/service";
-import { DangNhapNDType, GetAllProjectType, ProjectCategoryType } from "../Type/type";
+import {
+  DangNhapNDType,
+  GetAllProjectType,
+  ProjectCategoryType,
+} from "../Type/type";
 
 export const DangKyND = (user) => {
   return async (dispatch) => {
@@ -23,7 +27,9 @@ export const CreateProjectAction = (body) => {
     try {
       const result = await Manage.createProjectSV(body);
       if (result.status === 200) {
-        await message.success("Tao project thanh cong !", 3);
+        await message.success("Tao project thanh cong !", 3, () => {
+          history.push("/getAllProject");
+        });
       }
     } catch (error) {
       console.log("error", error);
@@ -38,13 +44,15 @@ export const DangNhap = (user) => {
     try {
       const result = await Manage.signinSV(user);
       if (result.status === 200) {
-        message.success("Dang Nhap thanh cong !", 3);
         console.log(result.data.content);
-        localStorage.setItem("user", JSON.stringify(result.data.content));
-        dispatch({
+        await localStorage.setItem("user", JSON.stringify(result.data.content));
+        await dispatch({
           type: DangNhapNDType,
           content: result.data.content,
         });
+        await dispatch(GetAllProjectAction());
+        message.success("Dang Nhap thanh cong !", 3);
+        await history.push("/getallproject");
       }
     } catch (error) {
       message.error(error.response?.data.message, 3);
@@ -70,7 +78,6 @@ export const ProjectCategoryAction = () => {
   };
 };
 
-
 export const GetAllProjectAction = () => {
   return async (dispatch) => {
     try {
@@ -83,12 +90,13 @@ export const GetAllProjectAction = () => {
         });
       }
     } catch (error) {
+      if (error.status === 401) console.log(error.data.message);
       console.log("error", error);
       console.log("error", error.response?.data);
     }
   };
 };
-export const  SearchGetAllProjectAction = (keyWord) => {
+export const SearchGetAllProjectAction = (keyWord) => {
   return async (dispatch) => {
     try {
       const result = await Manage.searchGetAllProjectSV(keyWord);
@@ -99,11 +107,10 @@ export const  SearchGetAllProjectAction = (keyWord) => {
           data: result.data.content,
         });
       }
+      if (result.status === 401) console.log(result.data.message);
     } catch (error) {
       console.log("error", error);
       console.log("error", error.response?.data);
     }
   };
 };
-
-

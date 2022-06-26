@@ -4,14 +4,14 @@ import { LockOutlined, MailOutlined } from "@ant-design/icons";
 import { Form, Image, Input } from "antd";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { stypeIF, stypeIT } from "../SignUp/SignUp";
 import { styleForm } from "../SignUp/SignUp";
 import { styleBtn } from "../SignUp/SignUp";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { DangNhap } from "../../redux/Action/action";
-
+import "./css.css";
 export default function SignIn() {
   const dispatch = useDispatch();
   const formik = useFormik({
@@ -30,13 +30,12 @@ export default function SignIn() {
       dispatch(DangNhap(values));
     },
   });
+
   return (
     <div className="container">
       <div className="row">
-        <div className="col-8">
-          <Image width="100%" height="auto" src="../../assets/img/image.bmp" />
-        </div>
-        <div className="col-4 p-2">
+        <div className="col-8 bg "></div>
+        <div className="col-4">
           <Form
             style={styleForm}
             onSubmitCapture={formik.handleSubmit}
@@ -79,9 +78,7 @@ export default function SignIn() {
               Button
             </button>
             <div className="text-center py-2">
-              <span>
-              Don't have an account yet? 
-              </span>
+              <span>Don't have an account yet?</span>
               <Link to="/signup" className=" text-decoration-none px-1">
                 Register now
               </Link>

@@ -16,8 +16,8 @@ function CreateProject() {
   const [value3, setValue3] = useState("");
 
   const editorRef = useRef(null);
-  const { pc } = useSelector((state) => state.MainReducer);
-  console.log(pc);
+  const { pc,user } = useSelector((state) => state.MainReducer);
+  console.log(user);
 
   useEffect(() => {
     dispatch(ProjectCategoryAction());
@@ -94,7 +94,7 @@ function CreateProject() {
           onInit={(evt, editor) => (editorRef.current = editor)}
           // initialValue="<p>This is the initial content of the editor.</p>"
           init={{
-            height: 500,
+            height: 200,
             menubar: false,
             plugins: [
               "advlist",

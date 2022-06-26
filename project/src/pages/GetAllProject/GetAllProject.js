@@ -1,34 +1,20 @@
 /** @format */
 
 import React, { useEffect } from "react";
-import { Avatar, Input, Space, Table, Tag } from "antd";
+import { Avatar, Input, Table } from "antd";
 import { EllipsisOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
 import {
   GetAllProjectAction,
   SearchGetAllProjectAction,
 } from "../../redux/Action/action";
+import { Link } from "react-router-dom";
+import { styleBtn } from "../SignUp/SignUp";
 const { Search } = Input;
 
 export default function GetAllProject() {
   const dispatch = useDispatch();
-
   const { data } = useSelector((state) => state.MainReducer);
-  console.log(data);
-  const colorAR = [
-    "magenta",
-    "red",
-    "volcano",
-    "orange",
-    "gold",
-    "lime",
-    "green",
-    "cyan",
-    "blue",
-    "geekblue",
-    "purple",
-  ];
-
   const columns2 = [
     {
       title: "ID",
@@ -84,12 +70,22 @@ export default function GetAllProject() {
 
   const onSearch = (value) => {
     if (value) dispatch(SearchGetAllProjectAction(value));
-    else  dispatch(GetAllProjectAction());
+    else dispatch(GetAllProjectAction());
   };
 
   return (
     <div className="container">
-      <h2>PROJECT</h2>
+      <div className="d-flex justify-content-between align-items-center">
+        <h2>PROJECT</h2>
+        <Link to={"/createProject"}>
+          <button
+            style={styleBtn}
+            className="px-4 py-2 d-flex justify-content-center align-items-center"
+          >
+            Create Project
+          </button>
+        </Link>
+      </div>
       <Search
         placeholder="input search text"
         allowClear

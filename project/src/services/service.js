@@ -1,6 +1,6 @@
 /** @format */
 
-import { http } from "../util/settingAxios";
+import  {http}  from "../util/settingAxios";
 
 class service {
   signupSV = (user) => {
