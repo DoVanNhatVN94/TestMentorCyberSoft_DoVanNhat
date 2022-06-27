@@ -4,7 +4,7 @@ import { LockOutlined, MailOutlined } from "@ant-design/icons";
 import { Form, Image, Input } from "antd";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { stypeIF, stypeIT } from "../SignUp/SignUp";
 import { styleForm } from "../SignUp/SignUp";
@@ -14,6 +14,15 @@ import { DangNhap } from "../../redux/Action/action";
 import "./css.css";
 export default function SignIn() {
   const dispatch = useDispatch();
+
+  const [width, setWidth] = useState(window.innerWidth);
+  useEffect(() => {
+    const handleWindowResize = () => setWidth(window.innerWidth);
+    window.addEventListener("resize", handleWindowResize);
+    return () => {
+      window.removeEventListener("resize", handleWindowResize);
+    };
+  }, []);
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -34,8 +43,10 @@ export default function SignIn() {
   return (
     <div className="container">
       <div className="row">
-        <div className="col-8 bg "></div>
-        <div className="col-4">
+       {width<768?"":(<div className="col-8 bg "></div>)}
+  
+    
+        <div className={width<768?"text-center":"col-4"}>
           <Form
             style={styleForm}
             onSubmitCapture={formik.handleSubmit}

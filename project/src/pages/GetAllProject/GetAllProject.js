@@ -94,7 +94,7 @@ export default function GetAllProject() {
           width: 200,
         }}
       />
-      <Table
+      <Table className="overflow-scroll"
         columns={columns2}
         dataSource={data}
         rowKey={(row) => {

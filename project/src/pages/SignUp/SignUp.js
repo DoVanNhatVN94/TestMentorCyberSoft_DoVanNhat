@@ -4,11 +4,7 @@ import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Form, Input } from "antd";
-import {
-  MailOutlined,
-  PhoneOutlined,
-  LockOutlined,
-} from "@ant-design/icons";
+import { MailOutlined, PhoneOutlined, LockOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { DangKyND } from "../../redux/Action/action";
@@ -37,19 +33,22 @@ export const stypeIT = {
 };
 
 export const styleForm = {
-  padding:'1.5em',
-  background:'#547dde1f',
-  borderRadius:10
-}
+  padding: "1.5em",
+  margin:"auto",
+  background: "#547dde1f",
+  borderRadius: 10,
+  maxWidth:400,
+
+};
 
 export const styleBtn = {
-  width: '100%',
-  height:30,
-  background:'#6576de',
-  color:'white',
-  border: 'none',
-  borderRadius: 5
-}
+  width: "100%",
+  height: 30,
+  background: "#6576de",
+  color: "white",
+  border: "none",
+  borderRadius: 5,
+};
 
 function SignUp() {
   const dispatch = useDispatch();
@@ -59,8 +58,6 @@ function SignUp() {
     margin: "auto",
     padding: "50px 0",
   };
-
-
 
 
 
@@ -88,16 +85,18 @@ function SignUp() {
     }),
     onSubmit: (values) => {
       console.log(values);
-      dispatch(DangKyND(values))
+      dispatch(DangKyND(values));
     },
   });
 
   return (
     <div style={style}>
-     
-      
-      <Form style={styleForm}  onSubmitCapture={formik.handleSubmit} layout="horizontal">
-      <h3 className="text-center sign_up py-2">Register CyberBugs</h3>
+      <Form
+        style={styleForm}
+        onSubmitCapture={formik.handleSubmit}
+        layout="horizontal"
+      >
+        <h3 className="text-center sign_up py-2">Register CyberBugs</h3>
         <Form.Item>
           <Input
             onChange={formik.handleChange}
@@ -108,8 +107,8 @@ function SignUp() {
             prefix={<MailOutlined />}
           />
           {formik.touched.name && formik.errors.name ? (
-              <div className="alert alert-danger">{formik.errors.name}</div>
-            ) : null}
+            <div className="alert alert-danger">{formik.errors.name}</div>
+          ) : null}
         </Form.Item>
         <Form.Item>
           <Input
@@ -121,8 +120,8 @@ function SignUp() {
             prefix={<MailOutlined />}
           />
           {formik.touched.email && formik.errors.email ? (
-              <div className="alert alert-danger">{formik.errors.email}</div>
-            ) : null}
+            <div className="alert alert-danger">{formik.errors.email}</div>
+          ) : null}
         </Form.Item>
         <Form.Item>
           <Input
@@ -134,8 +133,10 @@ function SignUp() {
             prefix={<PhoneOutlined />}
           />
           {formik.touched.phoneNumber && formik.errors.phoneNumber ? (
-              <div className="alert alert-danger">{formik.errors.phoneNumber}</div>
-            ) : null}
+            <div className="alert alert-danger">
+              {formik.errors.phoneNumber}
+            </div>
+          ) : null}
         </Form.Item>
         <Form.Item>
           <Input
@@ -148,19 +149,16 @@ function SignUp() {
             prefix={<LockOutlined />}
           />
           {formik.touched.password && formik.errors.password ? (
-              <div className="alert alert-danger">{formik.errors.password}</div>
-            ) : null}
+            <div className="alert alert-danger">{formik.errors.password}</div>
+          ) : null}
         </Form.Item>
 
-        <button
-          type="submit"
-          style={styleBtn}
-        >
+        <button type="submit" style={styleBtn}>
           Button
         </button>
         <div className="text-center py-2">
           <span>
-          Already have an account?
+            Already have an account?
             <Link to="/signin" className=" text-decoration-none px-1">
               Login now
             </Link>
