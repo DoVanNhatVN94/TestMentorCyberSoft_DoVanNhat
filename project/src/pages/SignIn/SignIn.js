@@ -52,7 +52,7 @@ export default function SignIn() {
             onSubmitCapture={formik.handleSubmit}
             layout="horizontal"
           >
-            <h3 className="text-center sign_up py-2">Register CyberBugs</h3>
+            <h3 className="text-center sign_up py-2">Login</h3>
 
             <Form.Item>
               <Input
