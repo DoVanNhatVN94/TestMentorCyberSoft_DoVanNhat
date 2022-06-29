@@ -45,17 +45,23 @@ export const DangNhap = (user) => {
       const result = await Manage.signinSV(user);
       if (result.status === 200) {
         console.log(result.data.content);
-        localStorage.setItem("user", JSON.stringify(result.data.content));
-        dispatch({
+        await localStorage.setItem(
+          "accessToken",
+          JSON.stringify(result.data.content.accessToken)
+        );
+        await dispatch({
           type: DangNhapNDType,
           content: result.data.content,
         });
-        message.success("Dang Nhap thanh cong !", 3, () =>
-          window.location.reload()
-        );
+        await message.success("Dang Nhap thanh cong !",1);
+        await history.push("/getallproject");
+        await window.location.reload();
       }
     } catch (error) {
-      message.error(error.response?.data.message, 3);
+      message.error(
+        error ? error.response?.data.message : "login không thành công !",
+        3
+      );
     }
   };
 };

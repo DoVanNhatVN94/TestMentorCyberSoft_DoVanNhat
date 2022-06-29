@@ -3,15 +3,19 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import { useDispatch, useSelector } from "react-redux";
-import { CreateProjectAction, ProjectCategoryAction } from "../../redux/Action/action";
+import {
+  CreateProjectAction,
+  ProjectCategoryAction,
+} from "../../redux/Action/action";
 
 import { Button, Form, Input, Select } from "antd";
+import { Redirect } from "react-router";
 
 const { Option } = Select;
 
 function CreateProject() {
   const dispatch = useDispatch();
-
+  const token = localStorage.getItem("accessToken");
   const editorRef = useRef(null);
   const { pc } = useSelector((state) => state.MainReducer);
 
@@ -39,11 +43,12 @@ function CreateProject() {
       categoryId,
     };
     console.log(body);
-    dispatch(CreateProjectAction(body))
+    dispatch(CreateProjectAction(body));
   };
-
+  if(!token)
+  return <Redirect to={"/signin"}/>
   return (
-    <div className="container ">
+    <div className="container padding_top ">
       <Form layout="vertical" onFinish={onFinish} className="p-4">
         <h2 className="pb-2 fw-bold">New Project</h2>
         <Form.Item
@@ -115,7 +120,7 @@ function CreateProject() {
           }}
         />
 
-        <Form.Item >
+        <Form.Item>
           <Button type="primary" htmlType="submit">
             Submit
           </Button>

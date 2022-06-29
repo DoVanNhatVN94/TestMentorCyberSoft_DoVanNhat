@@ -8,14 +8,15 @@ import {
   GetAllProjectAction,
   SearchGetAllProjectAction,
 } from "../../redux/Action/action";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { styleBtn } from "../SignUp/SignUp";
 const { Search } = Input;
 
 export default function GetAllProject() {
+  const token = localStorage.getItem("accessToken");
   const dispatch = useDispatch();
   const { data } = useSelector((state) => state.MainReducer);
-  const columns2 = [
+  const columns = [
     {
       title: "ID",
       dataIndex: "id",
@@ -65,16 +66,17 @@ export default function GetAllProject() {
   ];
 
   useEffect(() => {
-    dispatch(GetAllProjectAction());
+    if (token) dispatch(GetAllProjectAction());
   }, []);
 
   const onSearch = (value) => {
     if (value) dispatch(SearchGetAllProjectAction(value));
     else dispatch(GetAllProjectAction());
   };
-
+  if(!token)
+  return <Redirect to={"/signin"}/>
   return (
-    <div className="container">
+    <div className="container padding_top">
       <div className="d-flex justify-content-between align-items-center">
         <h2>PROJECT</h2>
         <Link to={"/createProject"}>
@@ -94,8 +96,9 @@ export default function GetAllProject() {
           width: 200,
         }}
       />
-      <Table className="overflow-scroll"
-        columns={columns2}
+      <Table
+        className="overflow-scroll"
+        columns={columns}
         dataSource={data}
         rowKey={(row) => {
           return row.id;

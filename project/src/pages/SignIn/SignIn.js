@@ -5,17 +5,19 @@ import { Form, Image, Input } from "antd";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { stypeIF, stypeIT } from "../SignUp/SignUp";
 import { styleForm } from "../SignUp/SignUp";
 import { styleBtn } from "../SignUp/SignUp";
 import { useDispatch, useSelector } from "react-redux";
 import { DangNhap } from "../../redux/Action/action";
 import "./css.css";
-export default function SignIn() {
+export default function SignIn(props) {
+  const {token} = props;
   const dispatch = useDispatch();
-
+  // const token = localStorage.getItem("accessToken");
   const [width, setWidth] = useState(window.innerWidth);
+
   useEffect(() => {
     const handleWindowResize = () => setWidth(window.innerWidth);
     window.addEventListener("resize", handleWindowResize);
@@ -23,6 +25,7 @@ export default function SignIn() {
       window.removeEventListener("resize", handleWindowResize);
     };
   }, []);
+
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -40,8 +43,10 @@ export default function SignIn() {
     },
   });
 
+  if(token)
+  return <Redirect to={"/getAllProject"}/>
   return (
-    <div className="container">
+    <div className="container padding_top">
       <div className="row">
        {width<768?"":(<div className="col-8 bg "></div>)}
   

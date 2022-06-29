@@ -3,3 +3,17 @@
     margin: 0;
     box-sizing: border-box;
 }
+.nav-link{
+    min-width: 100px;
+    margin: 0 10px;
+    text-align: center;
+}
+.fixed{
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+}
+.padding_top{
+    padding-top: 100px;
+}

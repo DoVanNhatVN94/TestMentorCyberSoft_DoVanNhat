@@ -1,6 +1,8 @@
-export const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5Mb3AiOiJCb290Y2FtcCAzMkUiLCJIZXRIYW5TdHJpbmciOiIxMC8wNC8yMDIzIiwiSGV0SGFuVGltZSI6IjE2ODEwODQ4MDAwMDAiLCJuYmYiOjE2NTA0NzQwMDAsImV4cCI6MTY4MTIzMjQwMH0._MPzAQorNhL5oVaR3-Az5_jYKW0_Acc0NBq1nZapr5k"
+/** @format */
 
-
-export const Authorization = JSON.parse(localStorage.getItem('user'))?.accessToken
-export const assetToken = `Bearer ${Authorization}`
-export const DOMAIN = "https://jiranew.cybersoft.edu.vn"
+export const token =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5Mb3AiOiJCb290Y2FtcCAzMkUiLCJIZXRIYW5TdHJpbmciOiIxMC8wNC8yMDIzIiwiSGV0SGFuVGltZSI6IjE2ODEwODQ4MDAwMDAiLCJuYmYiOjE2NTA0NzQwMDAsImV4cCI6MTY4MTIzMjQwMH0._MPzAQorNhL5oVaR3-Az5_jYKW0_Acc0NBq1nZapr5k";
+export const assetToken = `Bearer ${JSON.parse(
+  localStorage.getItem("accessToken")
+)}`;
+export const DOMAIN = "https://jiranew.cybersoft.edu.vn";
