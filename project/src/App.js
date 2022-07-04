@@ -1,7 +1,7 @@
 /** @format */
 import React, { Fragment, useEffect, useState } from "react";
 
-import { NavLink, Route, Router, Switch } from "react-router-dom";
+import { NavLink, Redirect, Route, Router, Switch } from "react-router-dom";
 import { createBrowserHistory } from "history";
 
 import SignUp from "./pages/SignUp/SignUp";
@@ -54,7 +54,7 @@ function App() {
             <NavLink
               activeClassName="myActive"
               activeStyle={style}
-              className="nav-link active"
+              className="nav-link"
               to="/signup"
             >
               Sign Up
@@ -113,6 +113,9 @@ function App() {
         </nav>
 
         <Switch>
+          <Route exact path="/">
+            <Redirect to={!token ? "/signin" : "/getAllProject"} />
+          </Route>
           <Route path="/signin">
             <SignIn token={token} />
           </Route>
