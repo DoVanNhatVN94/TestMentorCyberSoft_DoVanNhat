@@ -9,7 +9,7 @@ import { Link, Redirect } from "react-router-dom";
 import { stypeIF, stypeIT } from "../SignUp/SignUp";
 import { styleForm } from "../SignUp/SignUp";
 import { styleBtn } from "../SignUp/SignUp";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { DangNhap } from "../../redux/Action/action";
 import "./css.css";
 export default function SignIn(props) {

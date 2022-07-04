@@ -93,11 +93,11 @@ export default function GetAllProject() {
         allowClear
         onSearch={onSearch}
         style={{
-          width: 200,
+          width: 300,
         }}
       />
       <Table
-        className="overflow-scroll"
+        className="overflow-auto"
         columns={columns}
         dataSource={data}
         rowKey={(row) => {

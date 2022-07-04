@@ -27,7 +27,7 @@ export const CreateProjectAction = (body) => {
     try {
       const result = await Manage.createProjectSV(body);
       if (result.status === 200) {
-        await message.success("Tao project thanh cong !", 3, () => {
+        await message.success("Tao project thanh cong !", 2, () => {
           history.push("/getAllProject");
         });
       }

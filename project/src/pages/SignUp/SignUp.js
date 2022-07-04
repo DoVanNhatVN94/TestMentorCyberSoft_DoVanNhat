@@ -19,6 +19,7 @@ export const stypeIF = {
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
+  cursor:"pointer"
 };
 export const stypeIT = {
   color: "WHITE",
@@ -30,6 +31,7 @@ export const stypeIT = {
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
+  cursor:"pointer"
 };
 
 export const styleForm = {

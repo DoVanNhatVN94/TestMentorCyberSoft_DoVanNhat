@@ -22,8 +22,8 @@ function App() {
   const style = {
     borderImageSlice: "1",
     color: "rgb(101 118 222)",
-    boxShadow: "0 0 10px 0.5px rgb(101 118 222)",
-    transition: "all 0.5s",
+    borderBottom: "1px solid rgb(101 118 222)",
+    transition: "all 0.2s",
   };
   useEffect(() => {
     setToken(localStorage.getItem("accessToken"));
@@ -32,7 +32,7 @@ function App() {
   const logout = () => {
     localStorage.clear();
     history.push("/signin");
-    message.success("Đăng Xuất thành công",3)
+    message.success("Đăng Xuất thành công", 3);
     setToken(localStorage.getItem("accessToken"));
   };
 
@@ -73,17 +73,6 @@ function App() {
               to="/getallproject"
             >
               GetAllProject
-            </NavLink>
-          </li>
-
-          <li className="nav-item">
-            <NavLink
-              activeClassName="myActive"
-              activeStyle={style}
-              className="nav-link active"
-              to="/createproject"
-            >
-              Create Project
             </NavLink>
           </li>
           <li className="nav-item">
